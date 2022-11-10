@@ -9,7 +9,7 @@
   },
   "gypfile": true,
   "name": "@mydoge/dogecoin-js",
-  "version": "0.1.0-aplpha.0",
+  "version": "0.1.0-alpha.0",
   "description": "Javascript wrapper for libdogecoin with Typescript support",
   "repository": {
     "type": "git",

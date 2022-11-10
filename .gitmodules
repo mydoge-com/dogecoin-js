@@ -1,0 +1,3 @@
+[submodule "libdogecoin"]
+	path = libdogecoin
+	url = https://github.com/dogecoinfoundation/libdogecoin.git

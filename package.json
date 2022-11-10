@@ -1,0 +1,35 @@
+{
+    "main": "lib/binding.js",
+    "dependencies": {
+        "node-addon-api": "^5.0.0"
+    },
+    "scripts": {
+        "pretest": "tsc",
+        "test": "node --napi-modules ./test/test_binding.js"
+    },
+    "gypfile": true,
+    "name": "dogecoin-js",
+    "version": "0.1.0-aplpha.0",
+    "description": "Javascript wrapper for libdogecoin with Typescript support",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mydoge-com/dogecoin-js.git"
+    },
+    "keywords": [
+        "doge",
+        "dogecoin",
+        "libdogecoin",
+        "javascript",
+        "typescript"
+    ],
+    "author": "Alex Lewis",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mydoge-com/dogecoin-js/issues"
+    },
+    "homepage": "https://github.com/mydoge-com/dogecoin-js#readme",
+    "devDependencies": {
+        "@types/node": "^18.11.9",
+        "typescript": "^4.8.4"
+    }
+}

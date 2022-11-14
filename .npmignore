@@ -4,8 +4,7 @@
 node_modules/
 
 libdogecoin/
-!libdogecoin/.libs/
-!libdogecoin/include/
+emsdk/
 
 # for https://github.com/Microsoft/TypeScript/issues/4667
 lib/**/*.ts

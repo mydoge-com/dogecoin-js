@@ -1,24 +1,64 @@
 # dogecoin-js libdogecoin wrapper for Javascript
 
-## Getting Started
+## Using the wrapper in Javascript / Typescript
 
-```bash
-git submodule init
-git submodule update
-npm i
-npm test
-```
+1. Install the module
 
-## TODO
+   ```bash
+   npm install @mydogeofficial/dogecoin-js
+   ```
 
-- Add npm scripts for local dev setup: [example](https://stackoverflow.com/questions/23076968/npm-postinstall-only-on-development)
+## Compiling and testing the wrapper
 
-- Compile full version of libdogecoin for macOS
+1. Init submodules `libdogecoin` and `emsdk`
 
-- Export all bindings
+   ```bash
+   git submodule init
+   git submodule update
+   ```
 
-- Test suite
+2. Init `emsdk`
 
-- Add additional binaries for stadard node.js architectures: [example](https://sunzhongkui.wordpress.com/2013/07/26/create-and-publish-node-js-c-addon/)
+   - Linux
 
-- Setup npm package and publish
+     ```bash
+     cd emsdk
+     ./emsdk install latest
+     ./emsdk activate latest
+     source ./emsdk_env.sh
+     ```
+
+   - Mac M1 (TODO)
+
+     ```bash
+     brew install emscripten
+     ```
+
+3. Configure and compile `libdogecoin` using `emscripten`
+
+   ```bash
+   cd libdogecoin
+   ./autogen.sh
+   <emsdk path>/emconfigure ./configure CC=<emsdk path>/emcc AR=<emsdk path>/emar --host wasm32-emscripten --disable-net --disable-tools
+   <emsdk path>/emmake make
+   ```
+
+4. Export `libdogecoin` javascript functions
+
+   ```bash
+   cd libdogecoin/.libs
+   <emsdk path>/emcc -sEXPORTED_FUNCTIONS=_dogecoin_ecc_start,_dogecoin_ecc_stop,_generatePrivPubKeypair,_free,_malloc -sEXPORTED_RUNTIME_METHODS=ccall,cwrap,allocate libdogecoin.a ../src/secp256k1/.libs/libsecp256k1.a -o ../../lib/libdogecoin.js
+   ```
+
+5. Test
+
+   ```bash
+   npm i
+   npm test
+   ```
+
+## References
+
+- [libdogecoin](github.com/dogecoinfoundation/libdogecoin)
+- [emscripten](https://emscripten.org/docs/getting_started/downloads.html)
+- [@alamshafil example](https://gist.github.com/alamshafil/383fcb4b9b3bad160a7a988aa9938465)

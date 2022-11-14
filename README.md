@@ -61,8 +61,7 @@
 
 1. When running `emmake make` from step 3 above:
 
-   - Failure in `libdogecoin/include/dogecoin/portable_endian.h` with `platform not supported`
-   - Working around this issue by manually defining `__linux__` appears to work
+   - Missing platform support added to libdogecoin [here](https://github.com/dogecoinfoundation/libdogecoin/pull/84)
    - Error when linking `wasm-ld: error: libdogecoin_la-utils.o: section too large`
 
 ## References

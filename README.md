@@ -8,7 +8,7 @@
    npm install @mydogeofficial/dogecoin-js
    ```
 
-## Compiling and testing the wrapper
+## Compiling and testing the wrapper (WIP)
 
 1. Init submodules `libdogecoin` and `emsdk`
 
@@ -28,7 +28,7 @@
      source ./emsdk_env.sh
      ```
 
-   - Mac M1 (TODO)
+   - Mac M1
 
      ```bash
      brew install emscripten
@@ -39,7 +39,7 @@
    ```bash
    cd libdogecoin
    ./autogen.sh
-   <emsdk path>/emconfigure ./configure CC=<emsdk path>/emcc AR=<emsdk path>/emar --host wasm32-emscripten --disable-net --disable-tools
+   <emsdk path>/emconfigure ./configure CC=<emsdk path>/emcc AR=<emsdk path>/emar --host wasm32-emscripten --disable-net --disable-tools --disable-dependency-tracking
    <emsdk path>/emmake make
    ```
 
@@ -56,6 +56,14 @@
    npm i
    npm test
    ```
+
+## Known Issues
+
+1. When running `emmake make` from step 3 above:
+
+   - Failure in `libdogecoin/include/dogecoin/portable_endian.h` with `platform not supported`
+   - Working around this issue by manually defining `__linux__` appears to work
+   - Error when linking `wasm-ld: error: libdogecoin_la-utils.o: section too large`
 
 ## References
 

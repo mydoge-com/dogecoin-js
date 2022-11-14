@@ -1,3 +1,6 @@
 [submodule "libdogecoin"]
 	path = libdogecoin
 	url = https://github.com/dogecoinfoundation/libdogecoin.git
+[submodule "emsdk"]
+	path = emsdk
+	url = https://github.com/emscripten-core/emsdk.git

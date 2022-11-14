@@ -1,9 +1,11 @@
 #include <napi.h>
+#include "../libdogecoin/include/dogecoin/libdogecoin.h"
 
 using namespace Napi;
 
 Napi::String Method(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
+  dogecoin_ecc_start();
   return Napi::String::New(env, "world");
 }
 

@@ -3,7 +3,7 @@
     {
       'target_name': 'dogecoin-js-native',
       'sources': [ 'src/dogecoin_js.cc' ],
-      'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")"],
+      'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")", './libdogecoin/includes'],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
       'cflags!': [ '-fno-exceptions' ],
       'cflags_cc!': [ '-fno-exceptions' ],

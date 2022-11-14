@@ -1,4 +1,4 @@
-# dogecoin-js libdogecoin wrapper for Javascript
+# dogecoin-js libdogecoin wrapper for Javascript / Typescript
 
 ## Using the wrapper in Javascript / Typescript
 

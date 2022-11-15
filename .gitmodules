@@ -1,6 +1,6 @@
 [submodule "libdogecoin"]
 	path = libdogecoin
-	url = https://github.com/dogecoinfoundation/libdogecoin.git
+	url = https://github.com/alexanvl/libdogecoin.git
 	ignore = dirty
 [submodule "emsdk"]
 	path = emsdk

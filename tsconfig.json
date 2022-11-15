@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "noImplicitAny": false,
     "declaration": true,
-    "lib": [ "esnext" ],
+    "lib": ["esnext"],
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./lib",
     "strict": true,
     "target": "es6",
-    "types": [
-      "node"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
-  }
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"]
+  },
+  "exclude": ["emsdk", "test"]
 }

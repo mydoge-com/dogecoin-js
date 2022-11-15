@@ -1,14 +1,12 @@
-// const DogecoinJs = require("../dist/binding.js");
-// const assert = require("assert");
+const wrapper = require("../dist");
+const assert = require("assert");
 
-// assert(DogecoinJs, "The expected function is undefined");
+assert(wrapper, "The wrapper is undefined");
 
-// function testBasic()
-// {
-//     const result =  DogecoinJs("hello");
-//     assert.strictEqual(result, "world", "Unexpected value returned");
-// }
+async function run() {
+  await wrapper.generatePrivPub();
+}
 
-// assert.doesNotThrow(testBasic, undefined, "testBasic threw an expection");
+assert.doesNotThrow(run, undefined, "testBasic threw an expection");
 
-// console.log("Tests passed- everything looks OK!");
+console.log("Tests passed- everything looks OK!");

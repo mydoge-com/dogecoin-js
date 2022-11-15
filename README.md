@@ -8,7 +8,7 @@
    npm install @mydogeofficial/dogecoin-js
    ```
 
-## Compiling and testing the wrapper (WIP)
+## Compiling and testing the wrapper
 
 1. Init submodules `libdogecoin` and `emsdk`
 
@@ -62,7 +62,7 @@
 1. When running `emmake make` from step 3 above:
 
    - Missing platform support added to libdogecoin [here](https://github.com/dogecoinfoundation/libdogecoin/pull/84)
-   - Error when linking `wasm-ld: error: libdogecoin_la-utils.o: section too large`
+   - Error when linking on Mac m1 `wasm-ld: error: libdogecoin_la-utils.o: section too large`
 
 ## References
 

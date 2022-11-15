@@ -39,15 +39,15 @@
    ```bash
    cd libdogecoin
    ./autogen.sh
-   <emsdk path>/emconfigure ./configure CC=<emsdk path>/emcc AR=<emsdk path>/emar --host wasm32-emscripten --disable-net --disable-tools --disable-dependency-tracking
-   <emsdk path>/emmake make
+   emconfigure ./configure CC=emcc AR=emar --host wasm32-emscripten --disable-net --disable-tools --disable-dependency-tracking
+   emmake make
    ```
 
 4. Export `libdogecoin` javascript functions
 
    ```bash
    cd libdogecoin/.libs
-   <emsdk path>/emcc -sEXPORTED_FUNCTIONS=_dogecoin_ecc_start,_dogecoin_ecc_stop,_generatePrivPubKeypair,_free,_malloc -sEXPORTED_RUNTIME_METHODS=ccall,cwrap,allocate libdogecoin.a ../src/secp256k1/.libs/libsecp256k1.a -o ../../lib/libdogecoin.ts
+   emcc -sEXPORTED_FUNCTIONS=_dogecoin_ecc_start,_dogecoin_ecc_stop,_generatePrivPubKeypair,_free,_malloc -sEXPORTED_RUNTIME_METHODS=ccall,cwrap,allocate libdogecoin.a ../src/secp256k1/.libs/libsecp256k1.a -o ../../lib/libdogecoin.ts
    ```
 
 5. Test bindings

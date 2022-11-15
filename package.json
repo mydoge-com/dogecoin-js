@@ -1,5 +1,5 @@
 {
-  "main": "lib/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "pretest": "npm run clean && tsc && npm run copy-files",
     "clean": "rimraf dist/",

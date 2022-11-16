@@ -1,6 +1,7 @@
-import libdogecoin = require("./libdogecoin");
+import loadWASM = require("./libdogecoin");
 
 export async function generatePrivPubKeypair(): Promise<string[]> {
+  const libdogecoin = await loadWASM();
   const {
     ALLOC_NORMAL,
     UTF8ToString,
@@ -14,18 +15,15 @@ export async function generatePrivPubKeypair(): Promise<string[]> {
 
   _dogecoin_ecc_start();
 
-  var privatePtr = allocate(intArrayFromString(""), ALLOC_NORMAL);
-  var publicPtr = allocate(intArrayFromString(""), ALLOC_NORMAL);
+  const privatePtr = allocate(intArrayFromString(""), ALLOC_NORMAL);
+  const publicPtr = allocate(intArrayFromString(""), ALLOC_NORMAL);
 
   _generatePrivPubKeypair(privatePtr, publicPtr, false);
 
-  var privKey = UTF8ToString(privatePtr);
-  var pubKey = UTF8ToString(publicPtr);
+  const privKey = `${UTF8ToString(privatePtr)}`;
+  const pubKey = `${UTF8ToString(publicPtr)}`;
 
   _dogecoin_ecc_stop();
-
-  _free(privatePtr);
-  _free(publicPtr);
 
   return [pubKey, privKey];
 }

@@ -2,15 +2,15 @@
   "compilerOptions": {
     "allowJs": true,
     "noImplicitAny": false,
-    "declaration": true,
-    "lib": ["esnext"],
-    "module": "commonjs",
-    "outDir": "./dist",
     "rootDir": "./lib",
+    "outDir": "./dist",
+    "target": "es2019",
+    "lib": ["es2019"],
+    "module": "commonjs",
+    "esModuleInterop": true,
     "strict": true,
-    "target": "es6",
-    "types": ["node"],
-    "typeRoots": ["node_modules/@types"]
+    "declaration": true,
+    "sourceMap": true
   },
   "exclude": ["emsdk", "test"]
 }

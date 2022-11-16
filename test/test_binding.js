@@ -1,10 +1,10 @@
-const wrapper = require("../dist");
+const dogecoin_js = require("../dist/dogecoin-js");
 const assert = require("assert");
 
-assert(wrapper, "The wrapper is undefined");
+assert(dogecoin_js, "The wrapper is undefined");
 
 async function run() {
-  const [pub, priv] = await wrapper.generatePrivPubKeypair();
+  const [pub, priv] = await dogecoin_js.generatePrivPubKeypair();
 
   assert(pub.length, "generatePrivPubKeypair failed invalid pub");
   assert(priv.length, "generatePrivPubKeypair failed invalid priv");

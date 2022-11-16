@@ -47,7 +47,7 @@
 
    ```bash
    cd libdogecoin/.libs
-   emcc -sEXPORTED_FUNCTIONS=_dogecoin_ecc_start,_dogecoin_ecc_stop,_generatePrivPubKeypair,_generateHDMasterPubKeypair,_start_transaction,_add_utxo,_add_output,_finalize_transaction,_get_raw_transaction,_clear_transaction,_sign_raw_transaction,_sign_transaction,_store_raw_transaction,_free,_malloc -sEXPORTED_RUNTIME_METHODS=ccall,cwrap,allocate,ALLOC_NORMAL,ALLOC_STACK,UTF8ToString,intArrayFromString -sMODULARIZE=1 -sENVIRONMENT='web,worker,node' -sEXPORT_NAME=loadWASM libdogecoin.a ../src/secp256k1/.libs/libsecp256k1.a -o ../../lib/libdogecoin.ts
+   emcc -sEXPORTED_FUNCTIONS=_dogecoin_ecc_start,_dogecoin_ecc_stop,_generatePrivPubKeypair,_generateHDMasterPubKeypair,_start_transaction,_add_utxo,_add_output,_finalize_transaction,_get_raw_transaction,_clear_transaction,_sign_raw_transaction,_sign_transaction,_store_raw_transaction,_free,_malloc -sEXPORTED_RUNTIME_METHODS=ccall,cwrap,allocate,ALLOC_NORMAL,ALLOC_STACK,UTF8ToString,intArrayFromString -sMODULARIZE=1 -sENVIRONMENT='web,worker,node' -sEXPORT_NAME=loadWASM libdogecoin.a ../src/secp256k1/.libs/libsecp256k1.a -o ../../lib/libdogecoin.js
    ```
 
 5. Test bindings
@@ -56,13 +56,6 @@
    npm i
    npm test
    ```
-
-## Known Issues
-
-1. When running `emmake make` from step 3 above:
-
-   - Missing platform support added to libdogecoin [here](https://github.com/dogecoinfoundation/libdogecoin/pull/84)
-   - Error when linking on Mac m1 `wasm-ld: error: libdogecoin_la-utils.o: section too large`
 
 ## References
 

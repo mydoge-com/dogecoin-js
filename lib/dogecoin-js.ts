@@ -1,4 +1,4 @@
-import loadWASM = require("./libdogecoin");
+import loadWASM from "./libdogecoin";
 
 export async function generatePrivPubKeypair(): Promise<string[]> {
   const libdogecoin = await loadWASM();

@@ -2,10 +2,10 @@
   "main": "dist/dogecoin-js.js",
   "scripts": {
     "pretest": "npm run clean && tsc && npm run copy-files",
-    "clean": "rimraf dist/",
+    "clean": "rimraf dist/ && rimraf dist.browser/",
     "copy-files": "copyfiles -u 1 lib/*.wasm dist/",
     "test": "node ./test/test_binding.js",
-    "prepublish": "npm test"
+    "prepublish": "npm test && tsc -p tsconfig.browser.json"
   },
   "gypfile": true,
   "name": "@mydogeofficial/dogecoin-js",
@@ -33,5 +33,6 @@
     "copyfiles": "^2.4.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.4"
-  }
+  },
+  "type": "commonjs"
 }

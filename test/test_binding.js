@@ -4,7 +4,9 @@ const assert = require("assert");
 assert(wrapper, "The wrapper is undefined");
 
 async function run() {
-  await wrapper.generatePrivPub();
+  const [pub, priv] = await wrapper.generatePrivPubKeypair();
+  console.log("pub", pub);
+  console.log("priv", priv);
 }
 
 assert.doesNotThrow(run, undefined, "testBasic threw an expection");

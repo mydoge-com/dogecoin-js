@@ -1,4 +1,4 @@
-const dogecoin_js = require("../dist/dogecoin-js");
+const dogecoin_js = require("../dist");
 const assert = require("assert");
 
 assert(dogecoin_js, "The wrapper is undefined");

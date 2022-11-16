@@ -1,5 +1,5 @@
 {
-  "main": "dist/dogecoin-js.js",
+  "main": "dist/index.js",
   "scripts": {
     "pretest": "npm run clean && tsc && npm run copy-files",
     "clean": "rimraf dist/",
@@ -9,7 +9,7 @@
   },
   "gypfile": true,
   "name": "@mydogeofficial/dogecoin-js",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.5",
   "description": "Javascript wrapper for libdogecoin with Typescript support",
   "repository": {
     "type": "git",

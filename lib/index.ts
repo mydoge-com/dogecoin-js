@@ -113,7 +113,6 @@ export class DogecoinJS {
 
     const privatePtr = allocateUTF8(privKey)
     const publicPtr = allocateUTF8(pubKey)
-
     const result = _verifyPrivPubKeypair(privatePtr, publicPtr, testnet)
 
     _dogecoin_ecc_stop()
@@ -141,7 +140,6 @@ export class DogecoinJS {
 
     const privatePtr = allocateUTF8(privKey)
     const publicPtr = allocateUTF8(pubKey)
-
     const result = _verifyHDMasterPubKeypair(privatePtr, publicPtr, testnet)
 
     _dogecoin_ecc_stop()
@@ -164,7 +162,6 @@ export class DogecoinJS {
     _dogecoin_ecc_start()
 
     const publicPtr = allocateUTF8(pubKey)
-
     const result = _verifyP2pkhAddress(publicPtr, pubKey.length)
 
     _dogecoin_ecc_stop()
@@ -175,41 +172,64 @@ export class DogecoinJS {
   }
 
   startTransaction(): number {
-    const {
-      _dogecoin_ecc_start,
-      _dogecoin_ecc_stop,
-      _free,
-      _start_transaction,
-    } = this.libdogecoin
-
-    _dogecoin_ecc_start()
+    const { _start_transaction } = this.libdogecoin
 
     const result = _start_transaction()
-
-    _dogecoin_ecc_stop()
 
     return result
   }
 
   addUTXO(txIndex: number, txId: string, outputIndex: number): boolean {
-    const {
-      _dogecoin_ecc_start,
-      _dogecoin_ecc_stop,
-      _free,
-      _add_utxo,
-      allocateUTF8,
-    } = this.libdogecoin
-
-    _dogecoin_ecc_start()
+    const { _free, _add_utxo, allocateUTF8 } = this.libdogecoin
 
     const txIdPtr = allocateUTF8(txId)
-
     const result = _add_utxo(txIndex, txIdPtr, outputIndex)
-
-    _dogecoin_ecc_stop()
 
     _free(txIdPtr)
 
     return !!result
+  }
+
+  addOutput(txIndex: number, address: string, amount: string): boolean {
+    const { _free, _add_output, allocateUTF8 } = this.libdogecoin
+
+    const addrPtr = allocateUTF8(address)
+    const amountPtr = allocateUTF8(amount)
+    const result = _add_output(txIndex, addrPtr, amountPtr)
+
+    _free(addrPtr)
+    _free(amountPtr)
+
+    return !!result
+  }
+
+  finalizeTransaction(
+    txIndex: number,
+    destAddr: string,
+    fee: string,
+    outputSum: string,
+    changeAddr: string
+  ): string {
+    const { _free, _finalize_transaction, allocateUTF8 } = this.libdogecoin
+
+    const destPtr = allocateUTF8(destAddr)
+    const feePtr = allocateUTF8(fee)
+    const sumPtr = allocateUTF8(outputSum)
+    const changePtr = allocateUTF8(outputSum)
+
+    const result = _finalize_transaction(
+      txIndex,
+      destPtr,
+      feePtr,
+      sumPtr,
+      changePtr
+    )
+
+    _free(destPtr)
+    _free(feePtr)
+    _free(sumPtr)
+    _free(changePtr)
+
+    return result
   }
 }

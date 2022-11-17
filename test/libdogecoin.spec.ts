@@ -4,95 +4,122 @@ import { DogecoinJS } from '../dist'
 // Make a typed wrapper of our distributed bundle
 let wrapper: DogecoinJS
 
-describe('Test all wrapped interfaces (mainnet)', () => {
+describe('Test all address interfaces (mainnet)', () => {
   before(async () => {
     wrapper = await DogecoinJS.init()
   })
 
-  it('generatePrivPubKeypair', async () => {
-    const [priv, pub] = await wrapper.generatePrivPubKeypair()
+  it('generatePrivPubKeypair', () => {
+    const [priv, pub] = wrapper.generatePrivPubKeypair()
 
     expect(pub.length).is.equal(34)
     expect(priv.length).is.equal(52)
   })
 
-  it('generateHDMasterPubKeypair', async () => {
-    const [priv, pub] = await wrapper.generateHDMasterPubKeypair()
+  it('generateHDMasterPubKeypair', () => {
+    const [priv, pub] = wrapper.generateHDMasterPubKeypair()
 
     expect(pub.length).is.equal(34)
     expect(priv.length).is.gt(1)
     expect(priv.length).is.lt(200)
   })
 
-  it('generateDerivedHDPubkey', async () => {
-    const [priv] = await wrapper.generateHDMasterPubKeypair()
-    const pub = await wrapper.generateDerivedHDPubkey(priv)
+  it('generateDerivedHDPubkey', () => {
+    const [priv] = wrapper.generateHDMasterPubKeypair()
+    const pub = wrapper.generateDerivedHDPubkey(priv)
 
     expect(pub.length).is.equal(34)
   })
 
-  it('verifyPrivPubKeypair', async () => {
-    const [priv, pub] = await wrapper.generatePrivPubKeypair()
-    const valid = await wrapper.verifyPrivPubKeypair(priv, pub)
+  it('verifyPrivPubKeypair', () => {
+    const [priv, pub] = wrapper.generatePrivPubKeypair()
+    const valid = wrapper.verifyPrivPubKeypair(priv, pub)
 
     expect(valid).not.equal(false)
   })
 
-  it('verifyHDMasterPubKeypair', async () => {
-    const [priv, pub] = await wrapper.generateHDMasterPubKeypair()
-    const valid = await wrapper.verifyHDMasterPubKeypair(priv, pub)
+  it('verifyHDMasterPubKeypair', () => {
+    const [priv, pub] = wrapper.generateHDMasterPubKeypair()
+    const valid = wrapper.verifyHDMasterPubKeypair(priv, pub)
 
     expect(valid).not.equal(false)
   })
 
-  it('verifyPrivPubKeypair', async () => {
-    const [, pub] = await wrapper.generatePrivPubKeypair()
-    const valid = await wrapper.verifyP2pkhAddress(pub)
+  it('verifyPrivPubKeypair', () => {
+    const [, pub] = wrapper.generatePrivPubKeypair()
+    const valid = wrapper.verifyP2pkhAddress(pub)
 
     expect(valid).not.equal(false)
   })
 })
 
-describe('Test all wrapped interfaces (testnet)', () => {
-  it('generatePrivPubKeypair', async () => {
-    const [priv, pub] = await wrapper.generatePrivPubKeypair(true)
+describe('Test all address interfaces (testnet)', () => {
+  before(async () => {
+    wrapper = await DogecoinJS.init()
+  })
+
+  it('generatePrivPubKeypair', () => {
+    const [priv, pub] = wrapper.generatePrivPubKeypair(true)
 
     expect(pub.length).is.equal(34)
     expect(priv.length).is.equal(52)
   })
 
-  it('generateHDMasterPubKeypair', async () => {
-    const [priv, pub] = await wrapper.generateHDMasterPubKeypair(true)
+  it('generateHDMasterPubKeypair', () => {
+    const [priv, pub] = wrapper.generateHDMasterPubKeypair(true)
 
     expect(pub.length).is.equal(34)
     expect(priv.length).is.gt(1)
     expect(priv.length).is.lt(200)
   })
 
-  it('generateDerivedHDPubkey', async () => {
-    const [priv] = await wrapper.generateHDMasterPubKeypair(true)
-    const pub = await wrapper.generateDerivedHDPubkey(priv)
+  it('generateDerivedHDPubkey', () => {
+    const [priv] = wrapper.generateHDMasterPubKeypair(true)
+    const pub = wrapper.generateDerivedHDPubkey(priv)
 
     expect(pub.length).is.equal(34)
   })
 
-  it.skip('verifyPrivPubKeypair', async () => {
-    const [priv, pub] = await wrapper.generatePrivPubKeypair(true)
-    const valid = await wrapper.verifyPrivPubKeypair(priv, pub)
+  it.skip('verifyPrivPubKeypair', () => {
+    const [priv, pub] = wrapper.generatePrivPubKeypair(true)
+    const valid = wrapper.verifyPrivPubKeypair(priv, pub)
 
     expect(valid).not.equal(false)
   })
 
-  it.skip('verifyHDMasterPubKeypair', async () => {
-    const [priv, pub] = await wrapper.generateHDMasterPubKeypair(true)
-    const valid = await wrapper.verifyHDMasterPubKeypair(priv, pub)
+  it.skip('verifyHDMasterPubKeypair', () => {
+    const [priv, pub] = wrapper.generateHDMasterPubKeypair(true)
+    const valid = wrapper.verifyHDMasterPubKeypair(priv, pub)
 
     expect(valid).not.equal(false)
   })
 
-  it('verifyPrivPubKeypair', async () => {
-    const [, pub] = await wrapper.generatePrivPubKeypair(true)
-    const valid = await wrapper.verifyP2pkhAddress(pub)
+  it('verifyPrivPubKeypair', () => {
+    const [, pub] = wrapper.generatePrivPubKeypair(true)
+    const valid = wrapper.verifyP2pkhAddress(pub)
+
+    expect(valid).not.equal(false)
+  })
+})
+
+describe('Test all transaction interfaces', () => {
+  before(async () => {
+    wrapper = await DogecoinJS.init()
+  })
+
+  it('startTransaction', () => {
+    const index = wrapper.startTransaction()
+
+    expect(index).is.not.equal(0)
+  })
+
+  it('addUTXO', () => {
+    const index = wrapper.startTransaction()
+    const valid = wrapper.addUTXO(
+      index,
+      'b4455e7b7b7acb51fb6feba7a2702c42a5100f61f61abafa31851ed6ae076074',
+      1
+    )
 
     expect(valid).not.equal(false)
   })

@@ -12,7 +12,7 @@ export class DogecoinJS {
     return new DogecoinJS(libdogecoin)
   }
 
-  async generatePrivPubKeypair(testnet: boolean = false): Promise<string[]> {
+  generatePrivPubKeypair(testnet: boolean = false): string[] {
     const {
       _dogecoin_ecc_start,
       _dogecoin_ecc_stop,
@@ -40,9 +40,7 @@ export class DogecoinJS {
     return [privKey, pubKey]
   }
 
-  async generateHDMasterPubKeypair(
-    testnet: boolean = false
-  ): Promise<string[]> {
+  generateHDMasterPubKeypair(testnet: boolean = false): string[] {
     const {
       _dogecoin_ecc_start,
       _dogecoin_ecc_stop,
@@ -70,7 +68,7 @@ export class DogecoinJS {
     return [privKey, pubKey]
   }
 
-  async generateDerivedHDPubkey(masterPrivKey: string): Promise<string> {
+  generateDerivedHDPubkey(masterPrivKey: string): string {
     const {
       _dogecoin_ecc_start,
       _dogecoin_ecc_stop,
@@ -98,11 +96,11 @@ export class DogecoinJS {
     return pubKey
   }
 
-  async verifyPrivPubKeypair(
+  verifyPrivPubKeypair(
     privKey: string,
     pubKey: string,
     testnet: boolean = false
-  ): Promise<boolean> {
+  ): boolean {
     const {
       _dogecoin_ecc_start,
       _dogecoin_ecc_stop,
@@ -126,11 +124,11 @@ export class DogecoinJS {
     return !!result
   }
 
-  async verifyHDMasterPubKeypair(
+  verifyHDMasterPubKeypair(
     privKey: string,
     pubKey: string,
     testnet: boolean = false
-  ): Promise<boolean> {
+  ): boolean {
     const {
       _dogecoin_ecc_start,
       _dogecoin_ecc_stop,
@@ -154,7 +152,7 @@ export class DogecoinJS {
     return !!result
   }
 
-  async verifyP2pkhAddress(pubKey: string): Promise<boolean> {
+  verifyP2pkhAddress(pubKey: string): boolean {
     const {
       _dogecoin_ecc_start,
       _dogecoin_ecc_stop,
@@ -172,6 +170,45 @@ export class DogecoinJS {
     _dogecoin_ecc_stop()
 
     _free(publicPtr)
+
+    return !!result
+  }
+
+  startTransaction(): number {
+    const {
+      _dogecoin_ecc_start,
+      _dogecoin_ecc_stop,
+      _free,
+      _start_transaction,
+    } = this.libdogecoin
+
+    _dogecoin_ecc_start()
+
+    const result = _start_transaction()
+
+    _dogecoin_ecc_stop()
+
+    return result
+  }
+
+  addUTXO(txIndex: number, txId: string, outputIndex: number): boolean {
+    const {
+      _dogecoin_ecc_start,
+      _dogecoin_ecc_stop,
+      _free,
+      _add_utxo,
+      allocateUTF8,
+    } = this.libdogecoin
+
+    _dogecoin_ecc_start()
+
+    const txIdPtr = allocateUTF8(txId)
+
+    const result = _add_utxo(txIndex, txIdPtr, outputIndex)
+
+    _dogecoin_ecc_stop()
+
+    _free(txIdPtr)
 
     return !!result
   }

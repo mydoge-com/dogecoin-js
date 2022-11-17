@@ -3,8 +3,8 @@ import loadWASM from './libdogecoin'
 export interface DogecoinJS {
   generatePrivPubKeypair(): Promise<string[]>
   generateHDMasterPubKeypair(): Promise<string[]>
-  generateDerivedHDPubkey(masterPrivKey): Promise<string>
-  verifyPrivPubKeypair(privKey, pubKey): Promise<boolean>
+  generateDerivedHDPubkey(masterPrivKey: string): Promise<string>
+  verifyPrivPubKeypair(privKey: string, pubKey: string): Promise<boolean>
 }
 
 export async function generatePrivPubKeypair(): Promise<string[]> {

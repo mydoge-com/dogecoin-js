@@ -102,5 +102,5 @@ export async function verifyPrivPubKeypair(privKey, pubKey): Promise<boolean> {
 
   _dogecoin_ecc_stop()
 
-  return result
+  return !!result
 }

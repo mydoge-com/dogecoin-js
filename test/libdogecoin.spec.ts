@@ -31,10 +31,10 @@ describe('Test all wrapped interfaces', () => {
     expect(pub.length).is.equal(34)
   })
 
-  it.skip('verifyPrivPubKeypair', async () => {
+  it('verifyPrivPubKeypair', async () => {
     const [priv, pub] = await wrapper.generatePrivPubKeypair()
     const valid = await wrapper.verifyPrivPubKeypair(priv, pub)
 
-    expect(valid).not.equal(0)
+    expect(valid).not.equal(false)
   })
 })

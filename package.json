@@ -1,6 +1,7 @@
 {
   "main": "dist/index.js",
   "scripts": {
+    "lint": "yarn prettier 'lib/index.ts' --write",
     "pretest": "npm run clean && webpack",
     "clean": "rimraf dist/",
     "test": "mocha --require ts-node/register test/**/*.spec.ts",

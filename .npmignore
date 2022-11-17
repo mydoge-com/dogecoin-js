@@ -13,6 +13,7 @@ test/
 .gitignore
 .gitmodules
 .editorconfig
+.prettierrc
 npm-debug.log
 tsconfig.json
 webpack.config.js

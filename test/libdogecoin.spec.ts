@@ -11,22 +11,24 @@ describe('Test all wrapped interfaces', () => {
     const [priv, pub] = await wrapper.generatePrivPubKeypair()
 
     expect(pub.length).is.equal(34)
-    expect(priv.length).is.equal(50)
+    expect(priv.length).is.equal(52)
   })
 
   it('generateHDMasterPubKeypair', async () => {
     const [priv, pub] = await wrapper.generateHDMasterPubKeypair()
 
     expect(pub.length).is.equal(34)
-    expect(priv.length).is.equal(50)
+    expect(priv.length).is.gt(1)
+    expect(priv.length).is.lt(200)
   })
 
   it.skip('generateDerivedHDPubkey', async () => {
     const [priv] = await wrapper.generateHDMasterPubKeypair()
-    const childKey = await wrapper.generateDerivedHDPubkey(priv)
+    const pub = await wrapper.generateDerivedHDPubkey(priv)
 
-    expect(priv.length).is.equal(50)
-    expect(childKey.length).is.equal(34)
+    expect(priv.length).is.gt(1)
+    expect(priv.length).is.lt(200)
+    expect(pub.length).is.equal(34)
   })
 
   it.skip('verifyPrivPubKeypair', async () => {

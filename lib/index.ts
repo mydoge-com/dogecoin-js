@@ -12,15 +12,16 @@ export async function generatePrivPubKeypair(): Promise<string[]> {
   const {
     _dogecoin_ecc_start,
     _dogecoin_ecc_stop,
+    _free,
     _generatePrivPubKeypair,
-    allocateUTF8,
+    _malloc,
     UTF8ToString,
   } = libdogecoin
 
   _dogecoin_ecc_start()
 
-  const privatePtr = allocateUTF8('')
-  const publicPtr = allocateUTF8('')
+  const privatePtr = _malloc(53)
+  const publicPtr = _malloc(35)
 
   _generatePrivPubKeypair(privatePtr, publicPtr, false)
 
@@ -28,6 +29,9 @@ export async function generatePrivPubKeypair(): Promise<string[]> {
   const pubKey = UTF8ToString(publicPtr)
 
   _dogecoin_ecc_stop()
+
+  _free(privatePtr)
+  _free(publicPtr)
 
   return [privKey, pubKey]
 }
@@ -37,15 +41,16 @@ export async function generateHDMasterPubKeypair(): Promise<string[]> {
   const {
     _dogecoin_ecc_start,
     _dogecoin_ecc_stop,
+    _free,
     _generateHDMasterPubKeypair,
+    _malloc,
     UTF8ToString,
-    allocateUTF8,
   } = libdogecoin
 
   _dogecoin_ecc_start()
 
-  const privatePtr = allocateUTF8('')
-  const publicPtr = allocateUTF8('')
+  const privatePtr = _malloc(200)
+  const publicPtr = _malloc(35)
 
   _generateHDMasterPubKeypair(privatePtr, publicPtr, false)
 
@@ -53,6 +58,9 @@ export async function generateHDMasterPubKeypair(): Promise<string[]> {
   const pubKey = UTF8ToString(publicPtr)
 
   _dogecoin_ecc_stop()
+
+  _free(privatePtr)
+  _free(publicPtr)
 
   return [privKey, pubKey]
 }
@@ -62,21 +70,25 @@ export async function generateDerivedHDPubkey(masterPrivKey): Promise<string> {
   const {
     _dogecoin_ecc_start,
     _dogecoin_ecc_stop,
+    _free,
     _generateDerivedHDPubkey,
-    UTF8ToString,
-    intArrayFromString,
     _malloc,
+    UTF8ToString,
   } = libdogecoin
 
   _dogecoin_ecc_start()
 
-  let pub = _malloc(35)
+  let publicPtr = _malloc(35)
 
-  _generateDerivedHDPubkey(masterPrivKey, pub)
+  _generateDerivedHDPubkey(masterPrivKey, publicPtr)
+
+  const pubKey = UTF8ToString(publicPtr)
 
   _dogecoin_ecc_stop()
 
-  return UTF8ToString(pub)
+  _free(publicPtr)
+
+  return pubKey
 }
 
 export async function verifyPrivPubKeypair(privKey, pubKey): Promise<boolean> {
@@ -89,19 +101,6 @@ export async function verifyPrivPubKeypair(privKey, pubKey): Promise<boolean> {
   let result = _verifyPrivPubKeypair(privKey, pubKey, false)
 
   _dogecoin_ecc_stop()
-
-  // const { ccall, _dogecoin_ecc_start, _dogecoin_ecc_stop } = libdogecoin
-
-  // _dogecoin_ecc_start()
-
-  // var result = ccall(
-  //   'verifyPrivPubKeypair', // name of C function
-  //   'number', // return type
-  //   ['string', 'string', 'boolean'], // argument types
-  //   [privKey, pubKey, false] // arguments
-  // )
-
-  // _dogecoin_ecc_stop()
 
   return result
 }

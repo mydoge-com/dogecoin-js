@@ -1,24 +1,6 @@
 import loadWASM from './libdogecoin'
 
-export interface IDogecoinJS {
-  libdogecoin: any
-  generatePrivPubKeypair(testnet?: boolean): Promise<string[]>
-  generateHDMasterPubKeypair(testnet?: boolean): Promise<string[]>
-  generateDerivedHDPubkey(masterPrivKey: string): Promise<string>
-  verifyPrivPubKeypair(
-    privKey: string,
-    pubKey: string,
-    testnet?: boolean
-  ): Promise<boolean>
-  verifyHDMasterPubKeypair(
-    privKey: string,
-    pubKey: string,
-    testnet?: boolean
-  ): Promise<boolean>
-  verifyP2pkhAddress(pubKey: string): Promise<boolean>
-}
-
-export class DogecoinJS implements IDogecoinJS {
+export class DogecoinJS {
   libdogecoin: any
 
   constructor(libdogecoin: any) {

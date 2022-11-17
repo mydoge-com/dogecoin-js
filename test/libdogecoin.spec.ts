@@ -1,10 +1,8 @@
 import { expect } from 'chai'
-
 import { DogecoinJS } from '../dist'
-import { IDogecoinJS } from '../lib'
 
 // Make a typed wrapper of our distributed bundle
-let wrapper: IDogecoinJS
+let wrapper: DogecoinJS
 
 describe('Test all wrapped interfaces (mainnet)', () => {
   before(async () => {

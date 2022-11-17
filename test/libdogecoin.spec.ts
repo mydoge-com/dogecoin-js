@@ -91,4 +91,11 @@ describe('Test all wrapped interfaces (testnet)', () => {
 
     expect(valid).not.equal(false)
   })
+
+  it('verifyPrivPubKeypair', async () => {
+    const [, pub] = await wrapper.generatePrivPubKeypair(true)
+    const valid = await wrapper.verifyP2pkhAddress(pub)
+
+    expect(valid).not.equal(false)
+  })
 })

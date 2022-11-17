@@ -71,6 +71,6 @@
 
 ## References
 
-- [libdogecoin](github.com/dogecoinfoundation/libdogecoin)
+- [libdogecoin](https://github.com/dogecoinfoundation/libdogecoin)
 - [emscripten](https://emscripten.org/docs/getting_started/downloads.html)
 - [@alamshafil example](https://gist.github.com/alamshafil/383fcb4b9b3bad160a7a988aa9938465)

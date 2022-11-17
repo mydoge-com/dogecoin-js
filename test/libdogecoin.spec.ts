@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { truncate } from 'fs'
+
 import * as dogecoin_js from '../dist'
 import { DogecoinJS } from '../lib'
 

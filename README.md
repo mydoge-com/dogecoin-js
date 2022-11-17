@@ -11,9 +11,10 @@
 2. Import and use
 
    ```js
-   import * as dogecoin_js from '@mydogeofficial/dogecoin-js'
+   import { DogecoinJS } from '@mydogeofficial/dogecoin-js'
 
    async function run() {
+     const dogecoin_js = await DogecoinJS.init()
      const [pubKey, privKey] = await dogecoin_js.generatePrivPubKeypair()
      console.log(`generated: ${pubKey} ${privKey}`)
    }

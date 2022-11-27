@@ -51,7 +51,7 @@
    ```bash
    cd libdogecoin
    ./autogen.sh
-   emconfigure ./configure CC=emcc AR=emar --host wasm32-emscripten --disable-net --disable-tools --disable-dependency-tracking
+   emconfigure ./configure CC=emcc AR=emar --host wasm32 --disable-net --disable-tools --disable-dependency-tracking
    emmake make
    ```
 

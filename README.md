@@ -15,7 +15,7 @@
 
    async function run() {
      const dogecoin_js = await DogecoinJS.init()
-     const [privKey, pubKey] = await dogecoin_js.generatePrivPubKeypair()
+     const [privKey, pubKey] = dogecoin_js.generatePrivPubKeypair()
      console.log(`generated: ${privKey} ${pubKey}`)
    }
    ```

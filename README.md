@@ -43,7 +43,7 @@
    - Mac M1
 
      ```bash
-     brew install emscripten
+     brew install --ignore-dependencies emscripten
      ```
 
 3. Configure and compile `libdogecoin` using `emscripten`

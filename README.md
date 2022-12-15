@@ -15,7 +15,7 @@
 
    async function run() {
      const dogecoin_js = await DogecoinJS.init()
-     const [privKey, pubKey] = await dogecoin_js.generatePrivPubKeypair()
+     const [privKey, pubKey] = dogecoin_js.generatePrivPubKeypair()
      console.log(`generated: ${privKey} ${pubKey}`)
    }
    ```
@@ -43,7 +43,7 @@
    - Mac M1
 
      ```bash
-     brew install emscripten
+     brew install --ignore-dependencies emscripten
      ```
 
 3. Configure and compile `libdogecoin` using `emscripten`
@@ -51,7 +51,7 @@
    ```bash
    cd libdogecoin
    ./autogen.sh
-   emconfigure ./configure CC=emcc AR=emar --host wasm32-emscripten --disable-net --disable-tools --disable-dependency-tracking
+   emconfigure ./configure CC=emcc AR=emar --host wasm32 --disable-net --disable-tools --disable-dependency-tracking
    emmake make
    ```
 

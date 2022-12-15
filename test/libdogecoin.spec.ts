@@ -81,10 +81,20 @@ describe('Test all address interfaces (testnet)', () => {
   })
 
   it('getDerivedHDAddressByPath', () => {
-    const [priv] = wrapper.generateHDMasterPubKeypair(true)
-    const pub = wrapper.getDerivedHDAddressByPath(priv)
+    const [masterPriv] = wrapper.generateHDMasterPubKeypair(true)
+    const pubKey = wrapper.getDerivedHDAddressByPath(
+      masterPriv,
+      `m/44'/3'/0'/0/0`,
+      false
+    )
+    const privKey = wrapper.getDerivedHDAddressByPath(
+      masterPriv,
+      `m/44'/3'/0'/0/0`,
+      true
+    )
 
-    expect(pub.length).is.equal(34)
+    expect(pubKey.length).is.equal(111)
+    expect(privKey.length).is.equal(111)
   })
 
   it.skip('verifyPrivPubKeypair', () => {

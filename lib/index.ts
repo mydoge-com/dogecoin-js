@@ -98,8 +98,9 @@ export class DogecoinJS {
 
   getDerivedHDAddressByPath(
     masterPrivKey: string,
-    derivedPath: string
-  ): string[] {
+    derivedPath: string,
+    isPriv: boolean
+  ): string {
     const {
       _dogecoin_ecc_start,
       _dogecoin_ecc_stop,
@@ -114,22 +115,19 @@ export class DogecoinJS {
 
     const masterPrivatePtr = allocateUTF8(masterPrivKey)
     const pathPtr = allocateUTF8(derivedPath)
-    const publicPtr = _malloc(35)
-    const privatePtr = _malloc(200)
+    const outPtr = _malloc(200)
 
-    _getDerivedHDAddressByPath(masterPrivatePtr, pathPtr, publicPtr, privatePtr)
+    _getDerivedHDAddressByPath(masterPrivatePtr, pathPtr, outPtr, isPriv)
 
-    const pubKey = UTF8ToString(publicPtr)
-    const privKey = UTF8ToString(privatePtr)
+    const outKey = UTF8ToString(outPtr)
 
     _dogecoin_ecc_stop()
 
     _free(masterPrivatePtr)
     _free(pathPtr)
-    _free(publicPtr)
-    _free(privatePtr)
+    _free(outPtr)
 
-    return [privKey, pubKey]
+    return outKey
   }
 
   verifyPrivPubKeypair(

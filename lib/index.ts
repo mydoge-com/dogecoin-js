@@ -130,6 +130,42 @@ export class DogecoinJS {
     return outKey
   }
 
+  // getDerivedHDAddress(
+  //   masterPrivKey: string,
+  //   account: number,
+  //   isChange: boolean,
+  //   index: number,
+  //   isPriv: boolean
+  // ): string {
+  //   const {
+  //     _dogecoin_ecc_start,
+  //     _dogecoin_ecc_stop,
+  //     _free,
+  //     _getDerivedHDAddressByPath,
+  //     _malloc,
+  //     UTF8ToString,
+  //     allocateUTF8,
+  //   } = this.libdogecoin
+
+  //   _dogecoin_ecc_start()
+
+  //   const masterPrivatePtr = allocateUTF8(masterPrivKey)
+  //   const pathPtr = allocateUTF8(derivedPath)
+  //   const outPtr = _malloc(200)
+
+  //   _getDerivedHDAddressByPath(masterPrivatePtr, pathPtr, outPtr, isPriv)
+
+  //   const outKey = UTF8ToString(outPtr)
+
+  //   _dogecoin_ecc_stop()
+
+  //   _free(masterPrivatePtr)
+  //   _free(pathPtr)
+  //   _free(outPtr)
+
+  //   return outKey
+  // }
+
   verifyPrivPubKeypair(
     privKey: string,
     pubKey: string,

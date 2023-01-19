@@ -161,18 +161,41 @@ describe('Test all transaction interfaces', () => {
     const index = wrapper.startTransaction()
     wrapper.addUTXO(
       index,
+      'b4455e7b7b7acb51fb6feba7a2702c42a5100f61f61abafa31851ed6ae076074',
+      1
+    )
+    wrapper.addUTXO(
+      index,
       '42113bdc65fc2943cf0359ea1a24ced0b6b0b5290db4c63a3329c6601c4616e2',
       1
     )
-    wrapper.addOutput(index, 'DBKwBLEDY96jBtx1xCmjfBzp9FrNCWxnmM', '1.0')
+    wrapper.addOutput(index, 'nbGfXLskPh7eM1iG5zz5EfDkkNTo9TRmde', '5.0')
     const hex = wrapper.finalizeTransaction(
       index,
-      'DBKwBLEDY96jBtx1xCmjfBzp9FrNCWxnmM',
-      '0.002',
-      '10.0',
-      'DDPNi26RrGrwJoTtwaqntzCDEhYBNbuYLH'
+      'nbGfXLskPh7eM1iG5zz5EfDkkNTo9TRmde',
+      '0.00226',
+      '12.0',
+      'noxKJyGPugPRN4wqvrwsrtYXuQCk7yQEsy'
     )
 
-    expect(hex).not.equal(0)
+    expect(hex).not.equal('0')
+  })
+
+  it.skip('getRawTransaction', () => {
+    const index = wrapper.startTransaction()
+    wrapper.addUTXO(
+      index,
+      'b4455e7b7b7acb51fb6feba7a2702c42a5100f61f61abafa31851ed6ae076074',
+      1
+    )
+    wrapper.addUTXO(
+      index,
+      '42113bdc65fc2943cf0359ea1a24ced0b6b0b5290db4c63a3329c6601c4616e2',
+      1
+    )
+    wrapper.addOutput(index, 'DBKwBLEDY96jBtx1xCmjfBzp9FrNCWxnmM', '5.0')
+    const hex = wrapper.getRawTransaction(index)
+
+    expect(hex).not.equal('0')
   })
 })

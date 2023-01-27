@@ -285,7 +285,7 @@ export class DogecoinJS {
     const destPtr = allocateUTF8(destAddr)
     const feePtr = allocateUTF8(fee)
     const sumPtr = allocateUTF8(outputSum)
-    const changePtr = allocateUTF8(outputSum)
+    const changePtr = allocateUTF8(changeAddr)
 
     const result = _finalize_transaction(
       txIndex,

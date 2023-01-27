@@ -280,7 +280,8 @@ export class DogecoinJS {
     outputSum: string,
     changeAddr: string
   ): string {
-    const { _free, _finalize_transaction, allocateUTF8 } = this.libdogecoin
+    const { _free, _finalize_transaction, allocateUTF8, UTF8ToString } =
+      this.libdogecoin
 
     const destPtr = allocateUTF8(destAddr)
     const feePtr = allocateUTF8(fee)
@@ -300,14 +301,14 @@ export class DogecoinJS {
     _free(sumPtr)
     _free(changePtr)
 
-    return result
+    return UTF8ToString(result)
   }
 
   getRawTransaction(txIndex: number): string {
-    const { _get_raw_transaction } = this.libdogecoin
+    const { _get_raw_transaction, UTF8ToString } = this.libdogecoin
 
     const result = _get_raw_transaction(txIndex)
 
-    return result
+    return UTF8ToString(result)
   }
 }

@@ -174,7 +174,7 @@ describe('Test all transaction interfaces', () => {
     expect(valid).not.equal(false)
   })
 
-  it.skip('finalizeTransaction', () => {
+  it('finalizeTransaction', () => {
     const index = wrapper.startTransaction()
     wrapper.addUTXO(
       index,
@@ -198,7 +198,7 @@ describe('Test all transaction interfaces', () => {
     expect(hex).not.equal('0')
   })
 
-  it.skip('getRawTransaction', () => {
+  it('getRawTransaction', () => {
     const index = wrapper.startTransaction()
     wrapper.addUTXO(
       index,

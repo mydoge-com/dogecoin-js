@@ -31,6 +31,23 @@ describe('Test all address interfaces (mainnet)', () => {
     expect(pub.length).is.equal(34)
   })
 
+  it('getDerivedHDAddressByPath', () => {
+    const [masterPriv] = wrapper.generateHDMasterPubKeypair()
+    const pubKey = wrapper.getDerivedHDAddressByPath(
+      masterPriv,
+      `m/44'/3'/0'/0/0`,
+      false
+    )
+    const privKey = wrapper.getDerivedHDAddressByPath(
+      masterPriv,
+      `m/44'/3'/0'/0/0`,
+      true
+    )
+
+    expect(pubKey.length).is.equal(111)
+    expect(privKey.length).is.equal(111)
+  })
+
   it('verifyPrivPubKeypair', () => {
     const [priv, pub] = wrapper.generatePrivPubKeypair()
     const valid = wrapper.verifyPrivPubKeypair(priv, pub)
@@ -45,7 +62,7 @@ describe('Test all address interfaces (mainnet)', () => {
     expect(valid).not.equal(false)
   })
 
-  it('verifyPrivPubKeypair', () => {
+  it('verifyP2pkhAddress', () => {
     const [, pub] = wrapper.generatePrivPubKeypair()
     const valid = wrapper.verifyP2pkhAddress(pub)
 
@@ -97,21 +114,21 @@ describe('Test all address interfaces (testnet)', () => {
     expect(privKey.length).is.equal(111)
   })
 
-  it.skip('verifyPrivPubKeypair', () => {
-    const [priv, pub] = wrapper.generatePrivPubKeypair(true)
-    const valid = wrapper.verifyPrivPubKeypair(priv, pub)
-
-    expect(valid).not.equal(false)
-  })
-
-  it.skip('verifyHDMasterPubKeypair', () => {
-    const [priv, pub] = wrapper.generateHDMasterPubKeypair(true)
-    const valid = wrapper.verifyHDMasterPubKeypair(priv, pub)
-
-    expect(valid).not.equal(false)
-  })
-
   it('verifyPrivPubKeypair', () => {
+    const [priv, pub] = wrapper.generatePrivPubKeypair(true)
+    const valid = wrapper.verifyPrivPubKeypair(priv, pub, true)
+
+    expect(valid).not.equal(false)
+  })
+
+  it('verifyHDMasterPubKeypair', () => {
+    const [priv, pub] = wrapper.generateHDMasterPubKeypair(true)
+    const valid = wrapper.verifyHDMasterPubKeypair(priv, pub, true)
+
+    expect(valid).not.equal(false)
+  })
+
+  it('verifyP2pkhAddress', () => {
     const [, pub] = wrapper.generatePrivPubKeypair(true)
     const valid = wrapper.verifyP2pkhAddress(pub)
 

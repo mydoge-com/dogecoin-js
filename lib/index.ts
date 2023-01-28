@@ -24,8 +24,8 @@ export class DogecoinJS {
 
     _dogecoin_ecc_start()
 
-    const privatePtr = _malloc(53)
-    const publicPtr = _malloc(35)
+    const privatePtr = _malloc(52)
+    const publicPtr = _malloc(34)
 
     _generatePrivPubKeypair(privatePtr, publicPtr, testnet)
 
@@ -52,8 +52,8 @@ export class DogecoinJS {
 
     _dogecoin_ecc_start()
 
-    const privatePtr = _malloc(200)
-    const publicPtr = _malloc(35)
+    const privatePtr = _malloc(111)
+    const publicPtr = _malloc(34)
 
     _generateHDMasterPubKeypair(privatePtr, publicPtr, testnet)
 
@@ -82,7 +82,7 @@ export class DogecoinJS {
     _dogecoin_ecc_start()
 
     const privatePtr = allocateUTF8(masterPrivKey)
-    const publicPtr = _malloc(35)
+    const publicPtr = _malloc(34)
 
     _generateDerivedHDPubkey(privatePtr, publicPtr)
 
@@ -115,7 +115,7 @@ export class DogecoinJS {
 
     const masterPrivatePtr = allocateUTF8(masterPrivKey)
     const pathPtr = allocateUTF8(derivedPath)
-    const outPtr = _malloc(200)
+    const outPtr = _malloc(111)
 
     _getDerivedHDAddressByPath(masterPrivatePtr, pathPtr, outPtr, isPriv)
 
@@ -151,7 +151,7 @@ export class DogecoinJS {
 
   //   const masterPrivatePtr = allocateUTF8(masterPrivKey)
   //   const pathPtr = allocateUTF8(derivedPath)
-  //   const outPtr = _malloc(200)
+  //   const outPtr = _malloc(111)
 
   //   _getDerivedHDAddressByPath(masterPrivatePtr, pathPtr, outPtr, isPriv)
 

@@ -20,8 +20,7 @@ describe('Test all address interfaces (mainnet)', () => {
     const [priv, pub] = wrapper.generateHDMasterPubKeypair()
 
     expect(pub.length).is.equal(34)
-    expect(priv.length).is.gt(1)
-    expect(priv.length).is.lt(200)
+    expect(priv.length).is.equal(111)
   })
 
   it('generateDerivedHDPubkey', () => {

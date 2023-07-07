@@ -135,6 +135,91 @@ describe('Test all address interfaces (testnet)', () => {
   })
 })
 
+describe('Test all BIP 39 interfaces', () => {
+  before(async () => {
+    wrapper = await DogecoinJS.init()
+  })
+
+  it('generateEnglishMnemonic - Size 128', () => {
+    const mnemonic = wrapper.generateEnglishMnemonic(
+      "00000000000000000000000000000000",
+      "128",
+    );
+
+    expect(mnemonic).is.equal("abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about");
+  })
+
+  it('generateEnglishMnemonic - Size 160', () => {
+    const mnemonic = wrapper.generateEnglishMnemonic(
+      "0000000000000000000000000000000000000000",
+      "160",
+    );
+
+    expect(mnemonic).is.equal("abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon address");
+  })
+
+  it('generateEnglishMnemonic - Size 192', () => {
+    const mnemonic = wrapper.generateEnglishMnemonic(
+      "000000000000000000000000000000000000000000000000",
+      "192",
+    );
+
+    expect(mnemonic).is.equal("abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon agent");
+  })
+
+  it('generateEnglishMnemonic - Size 224', () => {
+    const mnemonic = wrapper.generateEnglishMnemonic(
+      "00000000000000000000000000000000000000000000000000000000",
+      "224",
+    );
+
+    expect(mnemonic).is.equal("abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon admit");
+  })
+
+  it('generateEnglishMnemonic - Size 256', () => {
+    const mnemonic = wrapper.generateEnglishMnemonic(
+      "0000000000000000000000000000000000000000000000000000000000000000",
+      "256",
+    );
+
+    expect(mnemonic).is.equal("abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art");
+  })
+
+  it('generateRandomEnglishMnemonic ', () => {
+    const mnemonic = wrapper.generateRandomEnglishMnemonic("256");
+
+    expect(mnemonic).is.not.empty;
+    expect(mnemonic).is.not.NaN;
+  })
+
+  it('getDerivedHDAddressFromMnemonic ', () => {
+    const result = wrapper.getDerivedHDAddressFromMnemonic(
+      0, 0, "0",
+      wrapper.generateEnglishMnemonic(
+        "00000000000000000000000000000000",
+        "128",
+      ),
+      "", true,
+    );
+
+    expect(result).is.equal("nZVmfmUtKPmskB9Ds4P9GUJy9eYFqPKHqH");
+  })
+})
+
+describe('Test all QR code interfaces', () => {
+  before(async () => {
+    wrapper = await DogecoinJS.init()
+  })
+
+  it('p2pkhToQrString', () => {
+    const qrCode = wrapper.p2pkhToQrString("nZVmfmUtKPmskB9Ds4P9GUJy9eYFqPKHqH");
+
+    expect(qrCode).is.not.empty;
+    expect(qrCode).is.not.NaN;
+    expect(qrCode).is.not.equal("0");
+  })
+})
+
 describe('Test all transaction interfaces', () => {
   before(async () => {
     wrapper = await DogecoinJS.init()
@@ -213,5 +298,41 @@ describe('Test all transaction interfaces', () => {
     const hex = wrapper.getRawTransaction(index)
 
     expect(hex).not.equal('0')
+  })
+})
+
+describe('Test all signing code interfaces', () => {
+  before(async () => {
+    wrapper = await DogecoinJS.init()
+  })
+
+  it('sign_message', () => {
+    const privkey = 'QWCcckTzUBiY1g3GFixihAscwHAKXeXY76v7Gcxhp3HUEAcBv33i'
+    const msg = 'Hello World!'
+    const result = wrapper.signMessage(privkey, msg)
+
+    expect(result).is.not.empty;
+    expect(result).is.not.NaN;
+    expect(result).is.not.equal("0");
+  })
+
+  it('verify_message with valid message', () => {
+    const privkey = 'QWCcckTzUBiY1g3GFixihAscwHAKXeXY76v7Gcxhp3HUEAcBv33i'
+    const msg = 'Hello World!'
+    const address = 'D8mQ2sKYpLbFCQLhGeHCPBmkLJRi6kRoSg'
+    const sig = wrapper.signMessage(privkey, msg)
+    const result = wrapper.verifyMessage(sig, msg, address)
+
+    expect(result).equal(true)
+  })
+
+  it('verify_message with invalid message', () => {
+    const privkey = 'QWCcckTzUBiY1g3GFixihAscwHAKXeXY76v7Gcxhp3HUEAcBv33i'
+    const msg = 'This is a new test message'
+    const address = 'D8mQ2sKYpLbFCQLhGeHCPBmkLJRi6kRoSg'
+    const sig = wrapper.signMessage(privkey, 'Hello World!')
+    const result = wrapper.verifyMessage(sig, msg, address)
+
+    expect(result).equal(false)
   })
 })

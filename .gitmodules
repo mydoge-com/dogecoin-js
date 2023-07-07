@@ -4,5 +4,6 @@
 	ignore = dirty
 [submodule "libdogecoin"]
 	path = libdogecoin
-	url = https://github.com/alexanvl/libdogecoin.git
+	url = https://github.com/dogecoinfoundation/libdogecoin.git
+	branch = main
 	ignore = dirty
